@@ -16,4 +16,4 @@ for aa in args.seq:
 		aas[aa] = 1
 
 for aacid in sorted(aas):
-	print(aacid,":",aas[aacid])
+	print(aacid,aas[aacid])
