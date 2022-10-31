@@ -13,7 +13,7 @@ output.pop()
 maxes = {}
 max = 0
 mins = {}
-min = 100
+min = 1000
 
 for i in range(len(output)):
     strip = output[i].rstrip()
