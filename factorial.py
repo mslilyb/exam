@@ -8,6 +8,11 @@ parser.add_argument('n', metavar = 'int', type = int, help = 'integer to calcula
 args = parser.parse_args()
 total = 1
 
+if args.n < 0:
+	sys.stderr.write(f'factorial.py: error: argument int: invalid negative int value {args.n}\n')
+	sys.exit(1)
+
+
 for i in range(1, args.n + 1):
 	total *= i
 
