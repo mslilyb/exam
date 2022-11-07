@@ -6,7 +6,7 @@ values = []
 for arg in sys.argv[1:]:
 	if arg.isdigit():
 		values.append(int(arg))
-	else: print(arg,"is not a valid integer", file=sys.stderr)
+	else: print(arg,"is not a valid integer", file = sys.stderr)
 
 values = sorted(values)
 

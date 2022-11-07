@@ -11,7 +11,7 @@ def readfasta(fname):
 
 	while True:
 		line = fp.readline()
-		if line = '': break
+		if line == '': break
 
 		line = line.rstrip()
 
