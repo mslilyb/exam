@@ -1,3 +1,4 @@
+#if divisible by 3, 5, or both, prints out message
 for i in range(1,101):
 	if i % 15 == 0: print("fizzbuzz")
 	elif i % 5 == 0: print("buzz")

@@ -9,12 +9,15 @@ args = parser.parse_args()
 
 output = subprocess.run(f'python3 aacomp.py {args.input}', shell=True, capture_output=True).stdout.decode().split("\n")
 
+#removes trailing whitespace
 output.pop()
+
 maxes = {}
 max = 0
 mins = {}
 min = 1000
 
+#process output to find max and min
 for i in range(len(output)):
     strip = output[i].rstrip()
     aa, count = strip.split()

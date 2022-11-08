@@ -4,6 +4,7 @@ import argparse
 import sys
 import math
 
+#finds entropy of supplied sequence
 def findentropy(seq):
 	freqs = {"A": 0, "C": 0, "G": 0, "T": 0}
 	total = 0
@@ -43,6 +44,7 @@ parser.add_argument("--lowercase", action = 'store_true',
 
 args = parser.parse_args()
 
+#calculate entropy for each sequence
 for name, seq in readfasta.read(args.fasta):
 
 	maskseq = list(seq)

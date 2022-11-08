@@ -8,6 +8,7 @@ for arg in sys.argv[1:]:
 		values.append(int(arg))
 	else: print(arg,"is not a valid integer", file = sys.stderr)
 
+#orders values for median
 values = sorted(values)
 
 

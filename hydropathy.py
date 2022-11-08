@@ -1,5 +1,7 @@
 import argparse
+import sys
 
+#initialize hydrophilicity dictionary, using Kyte-Doolittle
 aacids = {
 	"I": 4.5,
 	"V": 4.2,
@@ -32,7 +34,7 @@ args = parser.parse_args()
 
 results = {}
 
-
+#Calculate hydopathy in window
 for i in range(len(args.seq) - args.window + 1):
 	position1 = i + 1
 	position2 = i + args.window
@@ -43,7 +45,7 @@ for i in range(len(args.seq) - args.window + 1):
 		if aa in aacids:
 			total += aacids[aa]
 		else:
-			print("Illegal amino acid ",aa," in sequence.")
+			print("Illegal amino acid ",aa," in sequence.", file=sys.stderr)
 
 	results[(position1, position2)] = total
 

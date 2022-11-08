@@ -1,6 +1,6 @@
 import gzip
 
-
+#fasta reader
 def read(fname):
 	fp = None
 	seqname = ""

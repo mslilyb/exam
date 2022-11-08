@@ -1,12 +1,13 @@
 import sys
 import gzip
 
+#overlap finding function
 def findoverlap(beg1, end1, beg2, end2):
 	if beg1 < end2 and end1 > beg2: return True
 	else: 							return False
 
 
-
+#reads .gff filetype
 def readgff(fname):
 	if fname.endswith(".gz"): fp = gzip.open(fname, mode = "rt")
 	else:				      fp = open(fname)
@@ -30,10 +31,11 @@ def readgff(fname):
 
 
 
-
+#read two different files
 f1records = readgff(sys.argv[1])
 f2records = readgff(sys.argv[2])
 
+#find overlap between them
 for f1r in f1records:
 	for f2r in f2records:
 		if f1r["chrom"] != f2r["chrom"]: continue

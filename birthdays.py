@@ -3,6 +3,7 @@ import random
 counts = {}
 results = []
 
+#repeat 10000 times to get consistent answer
 for r in range(10000):
 	match = False
 	birthdays = []
@@ -25,18 +26,19 @@ for result in results:
 	counts[result] += 1
 
 
-range = 0
-rangecount = 0
+mode = 0
+modecount = 0
 mean = 0
 total = 0
 
+#find mean and mode
 for num in counts:
-	if counts[num] > rangecount:
-		range = num
-		rangecount = counts[num]
+	if counts[num] > modecount:
+		mode = num
+		modecount = counts[num]
 
 	total += num * counts[num]
 
 
 mean = total / 10000
-print("mean:", mean, " range:", range)
+print("mean:", mean, " mode:", mode)
