@@ -1,3 +1,60 @@
 #!/home/ashtoreth/anaconda3/bin/python3
+import readfasta
+import argparse
+import sys
+import math
 
-print("hello, world!")
+def findentropy(seq):
+	freqs = {"A": 0, "C": 0, "G": 0, "T": 0}
+	total = 0
+	h = 0
+
+	for nt in seq:
+		if nt in freqs:
+			freqs[nt] += 1
+			total += 1
+		else:
+			freqs[nt] = 1
+			total += 1
+			print("Warning, non-canonical base",nt,"in sequence", file=sys.stderr)
+
+	for nt in freqs:
+		freqs[nt] = freqs[nt] / total
+
+	if freqs["A"] != 0: h += freqs["A"] * math.log(freqs["A"])
+	if freqs["C"] != 0: h += freqs["C"] * math.log(freqs["C"])
+	if freqs["G"] != 0: h += freqs["G"] * math.log(freqs["G"])
+	if freqs["T"] != 0: h += freqs["T"] * math.log(freqs["T"])
+
+	h = -h/math.log(2)
+	return h
+
+
+parser = argparse.ArgumentParser(description = "entropy filter for nucleotide sequences")
+
+parser.add_argument("fasta", metavar = 'file', type = str,
+	help = "fasta file to filter")
+parser.add_argument("--window", metavar = 'int', type = int, required = False,
+	default = 5, help = "size of window")
+parser.add_argument("--threshold", metavar = 'float', type = float, required = False,
+	default = 1.1, help = "threshold for entropy default = %(default).2f")
+parser.add_argument("--lowercase", action = 'store_true',
+	help = "mask to lowercase, default mask to N")
+
+args = parser.parse_args()
+
+for name, seq in readfasta.read(args.fasta):
+
+	maskseq = list(seq)
+
+	for i in range(len(seq) - args.window + 1):
+		if findentropy(seq[i:i + args.window]) < args.threshold:
+			if args.lowercase:
+				maskseq[i:i + args.window] = maskseq[i:i + args.window].lower()
+			else:
+				nlist = ["N"] * len(maskseq[i:i + args.window])
+				maskseq[i:i + args.window] = nlist
+				
+
+	print(">",name)
+	print(''.join(maskseq))

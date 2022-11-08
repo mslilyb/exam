@@ -1,7 +1,7 @@
 import gzip
 
 
-def readfasta(fname):
+def read(fname):
 	fp = None
 	seqname = ""
 	seq = []
